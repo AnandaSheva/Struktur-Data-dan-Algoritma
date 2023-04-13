@@ -1,0 +1,115 @@
+class Menu:
+    def __init__(self, item, harga):
+        self.item = item
+        self.harga = harga
+
+    def get_item(self):
+        return self.item
+
+    def get_harga(self):
+        return self.harga
+
+#List Menu & Harga
+menu = {
+    "\nMakanan": [
+        Menu("1. Nasi Goreng", 12000),
+        Menu("2. Kwitiaw", 10000),
+        Menu("3. Ayam Geprek", 12000),
+        Menu("4. Mie Ayam", 10000),
+        Menu("5. Bakso", 15000),
+    ],
+    "Minuman": [
+        Menu("6. Es Teh", 5000),
+        Menu("7. Es Jeruk", 7000),
+        Menu("8. Kopi", 5000),
+        Menu("9. Susu Hangat", 7000)
+    ]
+}
+
+
+# Header
+print("===========================================================")
+print("                                                           ")        
+print("             Selamat Datang di Warteg Suka Maju            ") 
+print("                                                           ")
+print("===========================================================")
+
+
+# Nama pelanggan
+nama = input("Masukkan Nama Anda : ")
+
+while True:
+    #Tampilan Menu
+    print("\nSelamat Datang " + nama + ", ini adalah menu yang tersedia :")
+    for kategori, items in menu.items():
+        print(kategori + ":")
+        for item in items:
+            print("- " + item.get_item() + " (Rp " + str(item.get_harga()) + ")")
+        print()
+
+    #Pilihan item dan harga di 2 array
+    select_items = []
+    harga = []
+
+    # User Memilih item 1 atau lebih dari 1
+    while True:
+        item = input("Silahkan tulis nomor menu yang akan di pesan (ketik 'done' untuk selesai memilih): ")
+        if item == "done":
+            break
+        for items in menu.values():
+            for i in items:
+                if item == i.get_item()[0]:
+                    select_items.append(i.get_item())
+                    harga.append(i.get_harga())
+                    print(i.get_item() + " ditambahkan ke dalam pesanan ")
+                    break
+            else:
+                continue
+            break
+        else:
+            print("Maaf, Silahkan Tuliskan Nomor Menu dengan Benar.")
+
+    # Print out menu dan harga
+    print("\nItem yang dipilih:")
+    for i in range(len(select_items)):
+        print("- " + select_items[i] + " (Rp. " + str(harga[i]) + ")")
+
+    # Total jumlah item dan harga
+    total_cost = sum(harga)
+    print("\nTotal : Rp. " + str(total_cost))
+
+    # Syntax menghitung kembalian
+    while True:
+        payment = input("Masukkan Uang Anda : Rp. ")
+        try:
+            payment = float(payment)
+            break
+        except ValueError:
+            print("Invalid. Mohon Masukkan Dengan Benar")
+
+    change = payment - total_cost
+    if change < 0:
+        print("Maaf, Uang Anda Tidak Cukup.")
+    else:
+        print("\nKembalian Anda : Rp. " + str(change))
+        print("\nTerima Kasih Atas Pesanan Anda " + nama +  " !, Silahkan Tunggu Pesanan Anda.")
+
+   # Opsi Pilihan
+    order_again = input("Apakah Anda ingin memesan lagi? (y/n): ")
+    if order_again == "n":
+        break
+    elif order_again != "y":
+        print("Maaf, Mohon Jawab dengan 'y' atau 'n'.")
+
+# Closed Header        
+print("\n===========================================================")  
+print("                                                           ")      
+print("       Terima Kasih Telah Makan di Warteg Kami ^_^         ")
+print("                                                           ") 
+print("===========================================================") 
+
+
+# Anggota Kelompok :
+# 1. Ananda Sheva Hidayat (2217051096)
+# 2. Adiska Bayu Deri Saputra (2257051034)
+# 3. Ngasiroh Nurjayatri (2257051032)
